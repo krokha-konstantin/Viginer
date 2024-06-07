@@ -2,7 +2,7 @@ import detectEnglish, vigenereCipher
 import re, more_itertools, itertools, collections, time
 import numpy as np
 
-ALPHABET = np.array(list('ABCDEFGHIJKLMOPQRSTUVWXYZ'))
+ALPHABET = np.array(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
 
 
 def hacker(sourceText):
@@ -11,6 +11,7 @@ def hacker(sourceText):
   mostLikelyLengths = spacingsFactorsSorted(spacing)
   for keyLength in mostLikelyLengths:
     attempt = attemptWithKeyLength(processedText, sourceText, keyLength)
+    print(keyLength, attempt)
     if attempt != None:
       return attempt
     
@@ -104,7 +105,7 @@ def nthChars(string, n, bias):
 
 def getRidOfUncommon(counter):
   theBestLetters = []
-  borderFreq = counter.most_common(1)[0][1] - 2
+  borderFreq = counter.most_common(1)[0][1] - 3
   previousFreq = 0
   for char, freq in counter.most_common(len(counter)):
     if (freq != previousFreq and len(theBestLetters) > 4) or freq < borderFreq:
@@ -120,9 +121,13 @@ def mostCommonKeys(counter):
 
 
 
-source = """`Giovan Battista Bellaso, born of a distinguished family in 1505, was the son of Piervincenzo, a patrician of Brescia. Piervincenzo owned a house in town and a suburban estate in Capriano del Colle, in a neighborhood called Fenili Belasi. The estate included the Holy Trinity chapel, where a chaplain was paid a regular salary and provided with firewood. The Bellaso family coat of arms displayed three red-tongued gold lion heads in side view on a blue field. Bellaso earned a degree in civil law from the University of Padua in 1538. French author Blaise de Vigenère reported that Bellaso served as a secretary for Cardinal Rodolfo Pio di Carpi and credited him with inventing the reciprocal table, now called the Della Porta table. However, Bellaso never mentioned the Cardinal in his writings and explained he was working for Cardinal Duranti in Camerino in 1550. During this time, Bellaso needed to use secret correspondence for state affairs while his master was in Rome for a conclave. Skilled in research and mathematics, Bellaso became involved in secret writing, a practice highly admired in Italian courts, especially the Roman Curia. This was a golden age for cryptography, and Bellaso was one of many secretaries who experimented with new systems due to intellectual curiosity or practical necessity. His cipher system was groundbreaking and considered unbreakable for centuries. As a student of ciphers, he mentioned many enthusiasts, including prominent figures and "great princes." In 1552, he met Count Paolo Avogadro, Count Gianfrancesco Gambara, and the renowned writer Girolamo Ruscelli, also an expert in secret writing. These colleagues urged him to publish a complete and well-instructed version of his reciprocal table, which had been circulating in loose-leaf form. Copies of these tables still exist in private collections in Florence and Rome."""
-txt = vigenereCipher.encryptMessage('viginer', source)
+source = """Albert Einstein (14 March 1879 – 18 April 1955) was a German-born theoretical physicist who is widely held to be one of the greatest and most influential scientists of all time. Best known for developing the theory of relativity, Einstein also made important contributions to quantum mechanics, and was thus a central figure in the revolutionary reshaping of the scientific understanding of nature that modern physics accomplished in the first decades of the twentieth century.[1][5] His mass–energy equivalence formula E = mc2, which arises from relativity theory, has been called "the world's most famous equation".[6] He received the 1921 Nobel Prize in Physics "for his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect",[7] a pivotal step in the development of quantum theory. His work is also known for its influence on the philosophy of science.[8][9]
+Born in the German Empire, Einstein moved to Switzerland in 1895, forsaking his German citizenship (as a subject of the Kingdom of Württemberg)[note 1] the following year. In 1897, at the age of seventeen, he enrolled in the mathematics and physics teaching diploma program at the Swiss federal polytechnic school in Zürich, graduating in 1900. In 1901, he acquired Swiss citizenship, which he kept for the rest of his life. In 1903, he secured a permanent position at the Swiss Patent Office in Bern. In 1905, he submitted a successful PhD dissertation to the University of Zurich. In 1914, he moved to Berlin in order to join the Prussian Academy of Sciences and the Humboldt University of Berlin. In 1917, he became director of the Kaiser Wilhelm Institute for Physics; he also became a German citizen again, this time as a subject of the Kingdom of Prussia.[note 1]
+In 1933, while he was visiting the United States, Adolf Hitler came to power in Germany. Horrified by the Nazi "war of extermination" against his fellow Jews,[10] Einstein decided to remain in the US, and was granted American citizenship in 1940.[11] On the eve of World War II, he endorsed a letter to President Franklin D. Roosevelt alerting him to the potential German nuclear weapons program and recommending that the US begin similar research. Einstein supported the Allies but generally viewed the idea of nuclear weapons with great dismay.[12]
+In 1905, sometimes described as his annus mirabilis (miracle year), Einstein published four groundbreaking papers.[13] These outlined a theory of the photoelectric effect, explained Brownian motion, introduced his special theory of relativity—a theory which addressed the inability of classical mechanics to account satisfactorily for the behavior of the electromagnetic field—and demonstrated that if the special theory is correct, mass and energy are equivalent to each other. In 1915, he proposed a general theory of relativity that extended his system of mechanics to incorporate gravitation. A cosmological paper that he published the following year laid out the implications of general relativity for the modeling of the structure and evolution of the universe as a whole.[14][15] The middle part of his career also saw him making important contributions to statistical mechanics and quantum theory. Especially notable was his work on the quantum physics of radiation, in which light consists of particles, subsequently called photons. With the Indian physicist Satyendra Nath Bose, he laid the groundwork for Bose-Einstein statistics. For much of the last phase of his academic life, Einstein worked on two endeavors that proved ultimately unsuccessful. First, he advocated against quantum theory's introduction of fundamental randomness into science's picture of the world, objecting that "God does not play dice".[16] Second, he attempted to devise a unified field theory by generalizing his geometric theory of gravitation to include electromagnetism too. As a result, he became increasingly isolated from the mainstream of modern physics.
+In a 1999 poll of 130 leading physicists worldwide by the British journal Physics World, Einstein was ranked the greatest physicist of all time.[17] His intellectual achievements and originality have made the word Einstein broadly synonymous with genius.[18]"""
+txt = vigenereCipher.encryptMessage('eisntein', source)
 s = time.time()
 hak = hacker(txt)
-print(hacker(txt))
+print(hak)
 print(time.time() - s)
